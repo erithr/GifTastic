@@ -1,10 +1,6 @@
 var inputs = ["cat", "dog", "bird"];
 
-
-
-
-
-// Function for displaying movie data
+// Function for displaying input data
 function renderButtons() {
 
     // Deleting the inputs prior to adding new inputs
@@ -29,14 +25,15 @@ function renderButtons() {
 }
 
 // This function handles events where one button is clicked
-$("#add-movie").on("click", function (event) {
+$("#add-button").on("click", function (event) {
     // Preventing the buttons default behavior when clicked (which is submitting a form)
     event.preventDefault();
     // This line grabs the input from the textbox
-    var input = $("#movie-input").val().trim();
+    var input = $("#button-input").val().trim();
 
     // Adding the movie from the textbox to our array
     inputs.push(input);
+    $("#button-input").empty();
 
     // Calling renderButtons which handles the processing of our movie array
     renderButtons();
@@ -78,7 +75,12 @@ $(document).on("click", "button", function () {
                 // Creating and storing an image tag
                 var inputImage = $("<img>");
                 // Setting the src attribute of the image to a property pulled off the result item
-                inputImage.attr("src", results[i].images.fixed_height.url);
+                inputImage.attr("src", results[i].images.fixed_height_still.url);
+                inputImage.attr("data-still", results[i].images.fixed_height_still.url);
+                inputImage.attr("data-animate", results[i].images.fixed_height.url);
+                inputImage.attr("data-state", "still");
+                inputImage.attr("class", "gif");
+
 
                 // Appending the paragraph and image tag to the inputDiv
                 inputDiv.append(p);
@@ -90,4 +92,18 @@ $(document).on("click", "button", function () {
         });
 });
 renderButtons();
-
+//we need to have the document be loaded with our dynamic buttons before this would work. So we need a $(documenet).on
+$(document).on("click", ".gif", function () {
+    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+    var state = $(this).attr("data-state");
+    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+    // Then, set the image's data-state to animate
+    // Else set src to the data-still value
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+    } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+    }
+});
