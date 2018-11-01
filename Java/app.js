@@ -12,7 +12,7 @@ function renderButtons() {
 
         // Then dynamicaly generating buttons for each movie in the array
         // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
-        var a = $("<button>");
+        var a = $(`<button type="button" class="btn btn-primary">`);
         // Adding a class of movie to our button
         a.addClass("inputs");
         // Adding a data-attribute
@@ -25,7 +25,7 @@ function renderButtons() {
 }
 
 // This function handles events where one button is clicked
-$("#add-button").on("click", function(event) {
+$("#add-button").on("click", function (event) {
     // Preventing the buttons default behavior when clicked (which is submitting a form)
     event.preventDefault();
     // This line grabs the input from the textbox
@@ -41,7 +41,7 @@ $("#add-button").on("click", function(event) {
 });
 
 // Adding click event listen listener to all buttons
-$(document).on("click", "button", function() {
+$(document).on("click", "button", function () {
     // Grabbing and storing the data-input property value from the button
     var input = $(this).attr("data-input");
     console.log("button");
@@ -56,7 +56,7 @@ $(document).on("click", "button", function() {
         method: "GET"
     })
         // After data comes back from the request
-        .then(function(response) {
+        .then(function (response) {
             console.log(queryURL);
 
             console.log(response);
@@ -93,7 +93,7 @@ $(document).on("click", "button", function() {
 });
 renderButtons();
 //we need to have the document be loaded with our dynamic buttons before this would work. So we need a $(documenet).on
-$(document).on("click", ".gif", function() {
+$(document).on("click", ".gif", function () {
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("data-state");
     // If the clicked image's state is still, update its src attribute to what its data-animate value is.

@@ -14,3 +14,6 @@ page that loads Gifs based on buttons that can be dynamically added with a text 
     Now that i have all these neat buttons i need to have an event listner for the buttons to actually trigger our API call. Sadly i cant code in a $() for an element that does not exist in the HTML. So i need to do a $(Document).on to be able to have an on click fucntion work for the buttons that did not exist when the page was first opened but after the pages loads the JS and the dynamically added buttons are made. Now that it can actually do something when the buttons are pressed this triggers our API call and this dynamically adds our GIFs to the page as still images. 
 5. **Why Won't the Pictures Move**
     To help my mobile users be able to not loose so much DATA on their movile plan all the GIFs load in not moving, Using another $(Document).on function I have coded in to the button click function for the pictures to come in with data-still and data-animate attributes. With these attributes I can code in a boolean to run on click when a picture is clicked to swap from the data-still unmoviing picture to a data-animate GIF like everyone wants. 
+
+### Link To Project
+https://erithr.github.io/GifTastic/
